@@ -23,12 +23,9 @@ export default class cardItem extends Component {
     const discussion = this.discussion;
     const settings = JSON.parse(app.forum.attribute('dem13nDiscussionCards'));
     const isRead = settings.markCards === 1 && (!discussion.isRead() && app.session.user) ? 'Unread' : '';
-    const attrs = {};
-    attrs.className = "wrapImg" + (settings.cardFooter === 1 ? " After" : '');
     const image = getPostImage(discussion.firstPost());
     const media = image
       ? <img src={image}
-             className="previewCardImg"
              alt={discussion.title()}
              loading="lazy"/>
       : ''
@@ -50,24 +47,19 @@ export default class cardItem extends Component {
             ? craftBadges(discussion.badges().toArray())
             : ''}
 
-          {settings.cardFooter === 1
-            ? <div className="cardFoot">
-              <div className="Author">
-                {username(discussion.user())}
-              </div>
-              <div className="Date">
-                {humanTime(discussion.createdAt())}
-              </div>
+          <div class="card-body">
+            <div class="card-body-left">
+              <div className="cardTags">{craftTags(discussion.tags())}</div>
+              <div className="cardAuthor">{username(discussion.user())}</div>
+              <div className="cardTitle"><h2>{discussion.title()}</h2></div>
+              {settings.previewText === 1 && discussion.firstPost()
+                ? <div className="previewPost">{truncate(discussion.firstPost().contentPlain(), 150)}</div>
+                : ''}
             </div>
-            : ''}
-
-          {media}
-
-          <div className="cardTags">{craftTags(discussion.tags())}</div>
-          <div className="cardTitle"><h2>{discussion.title()}</h2></div>
-          {settings.previewText === 1 && discussion.firstPost()
-            ? <div className="previewPost">{truncate(discussion.firstPost().contentPlain(), 150)}</div>
-            : ''}
+            <div class="card-body-right">
+              {media}
+            </div>
+          </div>
 
           {settings.Replies === 1
             ? <div className="cardSpacer">
@@ -81,6 +73,7 @@ export default class cardItem extends Component {
                   <div className="Repcount">
                     {app.translator.trans('dem13n.forum.replies', {count: discussion.replyCount() || '0'})}
                   </div>
+                  {humanTime(discussion.createdAt())}
                 </div>
                 <div className="Arrow">
                   {icon('fas fa-angle-right')}
