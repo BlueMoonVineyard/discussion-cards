@@ -31,7 +31,7 @@ export default class cardItem extends Component {
              className="previewCardImg"
              alt={discussion.title()}
              loading="lazy"/>
-      : <div className="imgStub"/>
+      : ''
 
     return (
       <div key={discussion.id()}
@@ -50,27 +50,18 @@ export default class cardItem extends Component {
             ? craftBadges(discussion.badges().toArray())
             : ''}
 
-          <div {...attrs}>
-            {settings.Views === 1 && !isNaN(discussion.views())
-              ? <div className="imageLabel discussionViews">
-                {icon('fas fa-eye', {className: 'labelIcon'})}
-                {discussion.views()}
+          {settings.cardFooter === 1
+            ? <div className="cardFoot">
+              <div className="Author">
+                {username(discussion.user())}
               </div>
-              : ''}
-            {media}
-
-            {settings.cardFooter === 1
-              ? <div className="cardFoot">
-                <div className="Author">
-                  {username(discussion.user())}
-                </div>
-                <div className="Date">
-                  {humanTime(discussion.createdAt())}
-                </div>
+              <div className="Date">
+                {humanTime(discussion.createdAt())}
               </div>
-              : ''}
+            </div>
+            : ''}
 
-          </div>
+          {media}
 
           <div className="cardTags">{craftTags(discussion.tags())}</div>
           <div className="cardTitle"><h2>{discussion.title()}</h2></div>
