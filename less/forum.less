@@ -128,12 +128,20 @@
   height: 100%;
 }
 
+.cardTags {
+  padding: 0.5rem 1rem 0.5rem 1rem;
+}
+
 .cardAuthor {
   padding: 0 1rem 0.5rem 1rem;
 }
 
 .cardTitle {
   padding: 0 1rem 0.5rem 1rem;
+  h2 {
+    margin-top: 0;
+    margin-bottom: 0;
+  }
 }
 
 .previewPost {
@@ -166,9 +174,10 @@
   flex-direction: row;
 
   .card-body-left {
-
+    flex-grow: 75;
   }
   .card-body-right {
+    flex-grow: 25;
     max-width: 25%;
   }
 }
@@ -192,7 +201,6 @@
 }
 
 .cardTags {
-  margin: 0 15px;
   display: block;
   width: calc(~'100% - 30px');
   white-space: nowrap;
@@ -292,7 +300,6 @@
     }
 
     .cardTags {
-      margin: 5px 15px 15px;
       display: block;
       width: calc(~'100% - 30px');
       white-space: nowrap;
