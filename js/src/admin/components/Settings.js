@@ -5,7 +5,7 @@ import saveSettings from 'flarum/admin/utils/saveSettings';
 import Switch from 'flarum/common/components/Switch';
 import icon from 'flarum/common/helpers/icon';
 import UploadImageButton from 'flarum/admin/components/UploadImageButton';
-import SwitchTagList from './switchTagList';
+import SwitchTagList from './SwitchTagList';
 import LoadingModal from 'flarum/admin/components/LoadingModal';
 
 
